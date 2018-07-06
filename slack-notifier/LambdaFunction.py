@@ -36,7 +36,7 @@ logger.setLevel(logging.INFO)
 #main function
 
 def lambda_handler(event, context):
-    message =  str(event['detail']['eventDescription'][0]['latestDescription']  + "\n\n<https://phd.aws.amazon.com/phd/home?region=us-east-1#/event-log?eventID=" + event['detail']['eventArn'] + "|Click here> for details.")
+    message =  str("Account ID: \n\n" + event['account'] + "\n\n" + "Region : \n\n" + event['region'] + "\n\n" + "Resources : \n\n[ " + ",".join(event['resources']) + " ]" + "\n\n" + event['detail']['eventDescription'][0]['latestDescription']  + "\n\n<https://phd.aws.amazon.com/phd/home?region="+event['region']+"#/event-log?eventID="+ event['detail']['eventArn'] + "|Click here> for details.") 
     json.dumps(message)
     slack_message = {
         'channel': SLACK_CHANNEL,
