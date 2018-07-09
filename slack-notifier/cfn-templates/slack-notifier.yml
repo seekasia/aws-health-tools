@@ -63,10 +63,7 @@ Resources:
             - "logger.setLevel(logging.INFO) \n"
             - "# main function \n"
             - "def handler(event, context): \n"
-            - "  message =  str(event['detail']['eventDescription'][0]['latestDescription']
-              \ + \"\\n\\n<https://phd.aws.amazon.com/phd/home?region="
-            - Ref: "AWS::Region"
-            - "#/event-log?eventID=\"+ event['detail']['eventArn'] + \"|Click here> for details.\") \n"
+            - "  message =  str('Account ID: \\n\\n' + event['account'] + '\\n\\n' + 'Region : \\n\\n' + event['region'] + '\\n\\n' + 'Resources : \\n\\n[ ' + ','.join(event['resources']) + ' ]' + '\\n\\n' + event['detail']['eventDescription'][0]['latestDescription']  + '\\n\\n<https://phd.aws.amazon.com/phd/home?region='+event['region']+'#/event-log?eventID='+ event['detail']['eventArn'] + '|Click here> for details.')  \n"
             - "  json.dumps(message) \n"
             - "  slack_message = { \n"
             - "    'channel': '"
